@@ -1,0 +1,52 @@
+{% load socialaccount %}
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light card" style="background: white !important;">
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-between w-100">
+                <a href="{% url 'index' %}"><img 
+                    src="{{ 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/2560px-Instagram_logo.svg.png' }}" 
+                    width="180" height="60" alt="lorem" style="margin-right: auto;"></a>
+                <div>
+                    <form action="#" method="GET">
+                        <input name="words" placeholder="Искать здесь..." style = "width: 200px; height: 40px;" type="search">
+                        <button type="submit" name="key_word"><i class="fa fa-search"></i></button></button>
+                    </form>
+                </div>
+                {% if user.is_authenticated %}
+                    <p>Welcome, {{ user.username }} !</p>
+                    <div>
+                        <a href="{% url 'logout' %}"><img src="{{ 'https://cdn3.iconfinder.com/data/icons/real-assets-1/100/doorway-512.png' }}" 
+                            width="60" height="60" alt="lorem" style="margin-right: auto;"></a>
+                    </div>
+                    <div>
+                        <a href="{% url 'create' %}"><img src="{{ 'https://pics.freeicons.io/uploads/icons/png/6362561671543238881-512.png' }}" 
+                        width="50" height="50" alt="lorem" style="margin-right: auto;"></a>
+                    </div>
+                {% else %}
+                    <a href="{% provider_login_url 'google' %}"><img src="{{ 'data:image/png;base64,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' }}" 
+                        width="180" height="50" alt="lorem" style="margin-right: auto;"></a>
+                    <a href="{% url 'account_login' %}"><img src="{{ 'https://static.thenounproject.com/png/736543-200.png' }}" 
+                        width="45" height="45" alt="lorem" style="margin-right: auto;"></a>
+                    <a href="{% url 'account_signup' %}"><img src="{{ 'https://cdn2.iconfinder.com/data/icons/mobile-banking-ver-1a/100/1-38-512.png' }}" 
+                        width="50" height="50" alt="lorem" style="margin-right: auto;"></a>
+                {% endif %}
+                <div class="d-flex align-items-center justify-content-between" style="width: 200px;">
+                    <i class="fa fa-home" style="font-size: 25px;"></i>
+                    <i class="far fa-heart" style="font-size:25px"></i>
+                    {% if user.id %}
+                        <a href="{% url 'profile' user.id %}">
+                            {% if user.image %}
+                                <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}"
+                                     alt="" style="width: 40px;border-radius: 100%;">
+                            {% else %}
+                                <img src="https://icdn.lenta.ru/images/2021/04/15/14/20210415144216836/square_1024_36291bbdbfc0ce89b6635a2702b07a1c.jpg"
+                                     alt="" style="width: 40px;border-radius: 100%;">
+                            {% endif %}
+                        </a>
+                    {% else %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>

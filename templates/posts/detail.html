@@ -1,0 +1,18 @@
+{% extends 'index.html' %}
+{% block content %}
+    <div class="card-group">
+        <div class="card">
+            {% for image in post.post_image.all %}
+                <br>
+                <img src="{{ image.image.url }}" class="card-img-top" alt="..." style="width: 100%; height: auto">
+            {% endfor %}
+            <div class="card-body">
+                <p class="card-text">{{ post.description }}</p>
+                {% for tag in post.tag.all %}
+                     <p class="card-text">{{ tag.title}}</p>
+                {% endfor %}
+                <p class="card-text"><small class="text-muted">{{ post.create_at }}</small></p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
